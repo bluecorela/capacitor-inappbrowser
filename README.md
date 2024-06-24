@@ -44,6 +44,8 @@ Then the permission will be asked when the camera is used.
 * [`setUrl(...)`](#seturl)
 * [`addListener('urlChangeEvent', ...)`](#addlistenerurlchangeevent)
 * [`addListener('closeEvent', ...)`](#addlistenercloseevent)
+* [`addListener('browserPageLoaded', ...)`](#addlistenerbrowserpageloaded)
+* [`addListener('messageEvent', ...)`](#addlistenermessageevent)
 * [`addListener('confirmBtnClicked', ...)`](#addlistenerconfirmbtnclicked)
 * [`removeAllListeners()`](#removealllisteners)
 * [`reload()`](#reload)
@@ -211,6 +213,46 @@ Listen for close click only for openWebView
 --------------------
 
 
+### addListener('browserPageLoaded', ...)
+
+```typescript
+addListener(eventName: "browserPageLoaded", listenerFunc: PageLoadListener) => Promise<PluginListenerHandle>
+```
+
+Listen for browser page load
+
+| Param              | Type                                                          |
+| ------------------ | ------------------------------------------------------------- |
+| **`eventName`**    | <code>'browserPageLoaded'</code>                              |
+| **`listenerFunc`** | <code><a href="#pageloadlistener">PageLoadListener</a></code> |
+
+**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
+
+**Since:** 0.4.0
+
+--------------------
+
+
+### addListener('messageEvent', ...)
+
+```typescript
+addListener(eventName: "messageEvent", listenerFunc: MessageReceivedListener) => Promise<PluginListenerHandle>
+```
+
+Listen for posted messages
+
+| Param              | Type                                                                        |
+| ------------------ | --------------------------------------------------------------------------- |
+| **`eventName`**    | <code>'messageEvent'</code>                                                 |
+| **`listenerFunc`** | <code><a href="#messagereceivedlistener">MessageReceivedListener</a></code> |
+
+**Returns:** <code>Promise&lt;<a href="#pluginlistenerhandle">PluginListenerHandle</a>&gt;</code>
+
+**Since:** 0.4.0
+
+--------------------
+
+
 ### addListener('confirmBtnClicked', ...)
 
 ```typescript
@@ -352,6 +394,16 @@ Reload the current web page.
 | **`url`** | <code>string</code> | Emit when the url changes | 0.0.1 |
 
 
+#### PageLoadEvent
+
+
+#### MessageEvent
+
+| Prop          | Type                | Description                          | Since |
+| ------------- | ------------------- | ------------------------------------ | ----- |
+| **`message`** | <code>string</code> | Emit when the webview post a message | 0.0.1 |
+
+
 #### BtnEvent
 
 | Prop      | Type                | Description                    | Since |
@@ -403,6 +455,16 @@ Construct a type with a set of properties K of type T
 #### UrlChangeListener
 
 <code>(state: <a href="#urlevent">UrlEvent</a>): void</code>
+
+
+#### PageLoadListener
+
+<code>(state: <a href="#pageloadevent">PageLoadEvent</a>): void</code>
+
+
+#### MessageReceivedListener
+
+<code>(state: <a href="#messageevent">MessageEvent</a>): void</code>
 
 
 #### ConfirmBtnListener

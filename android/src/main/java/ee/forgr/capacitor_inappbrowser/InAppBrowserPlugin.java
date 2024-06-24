@@ -313,12 +313,19 @@ public class InAppBrowserPlugin
     } else {
       options.setCloseModal(false);
     }
+
     options.setPluginCall(call);
+
+
     //    options.getToolbarItemTypes().add(ToolbarItemType.RELOAD); TODO: fix this
+
+
+
     options.setCallbacks(
       new WebViewCallbacks() {
         @Override
         public void urlChangeEvent(String url) {
+          Log.d("Debug","urlChange");
           notifyListeners("urlChangeEvent", new JSObject().put("url", url));
         }
 
@@ -329,12 +336,19 @@ public class InAppBrowserPlugin
 
         @Override
         public void pageLoaded() {
+
+          Log.d("Debug","pageLoaded");
           notifyListeners("browserPageLoaded", new JSObject());
         }
 
         @Override
         public void pageLoadError() {
           notifyListeners("pageLoadError", new JSObject());
+        }
+
+        @Override
+        public void messageReceived(JSObject obj) {
+          notifyListeners("messageEvent", obj);
         }
       }
     );
@@ -349,8 +363,11 @@ public class InAppBrowserPlugin
               options,
               InAppBrowserPlugin.this
             );
+            Log.d("Debug","Test tag");
+
             webViewDialog.presentWebView();
             webViewDialog.activity = InAppBrowserPlugin.this.getActivity();
+            webViewDialog.addJSInterface();
           }
         }
       );

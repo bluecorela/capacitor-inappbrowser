@@ -7,6 +7,16 @@ export interface UrlEvent {
      */
     url: string;
 }
+export interface MessageEvent {
+    /**
+     * Emit when the webview post a message
+     *
+     * @since 0.0.1
+     */
+    action: string;
+}
+export interface PageLoadEvent {
+}
 export interface BtnEvent {
     /**
      * Emit when a button is clicked.
@@ -17,6 +27,8 @@ export interface BtnEvent {
 }
 export declare type UrlChangeListener = (state: UrlEvent) => void;
 export declare type ConfirmBtnListener = (state: BtnEvent) => void;
+export declare type MessageReceivedListener = (state: MessageEvent) => void;
+export declare type PageLoadListener = (state: PageLoadEvent) => void;
 export declare enum BackgroundColor {
     WHITE = "white",
     BLACK = "black"
@@ -251,6 +263,18 @@ export interface InAppBrowserPlugin {
      * @since 0.4.0
      */
     addListener(eventName: "closeEvent", listenerFunc: UrlChangeListener): Promise<PluginListenerHandle>;
+    /**
+     * Listen for browser page load
+     *
+     * @since 0.4.0
+     */
+    addListener(eventName: "browserPageLoaded", listenerFunc: PageLoadListener): Promise<PluginListenerHandle>;
+    /**
+     * Listen for posted messages
+     *
+     * @since 0.4.0
+     */
+    addListener(eventName: "messageEvent", listenerFunc: MessageReceivedListener): Promise<PluginListenerHandle>;
     /**
      * Will be triggered when user clicks on confirm button when disclaimer is required, works only on iOS
      *

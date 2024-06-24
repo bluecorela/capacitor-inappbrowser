@@ -204,6 +204,64 @@
       },
       {
         "name": "addListener",
+        "signature": "(eventName: \"browserPageLoaded\", listenerFunc: PageLoadListener) => Promise<PluginListenerHandle>",
+        "parameters": [
+          {
+            "name": "eventName",
+            "docs": "",
+            "type": "'browserPageLoaded'"
+          },
+          {
+            "name": "listenerFunc",
+            "docs": "",
+            "type": "PageLoadListener"
+          }
+        ],
+        "returns": "Promise<PluginListenerHandle>",
+        "tags": [
+          {
+            "name": "since",
+            "text": "0.4.0"
+          }
+        ],
+        "docs": "Listen for browser page load",
+        "complexTypes": [
+          "PluginListenerHandle",
+          "PageLoadListener"
+        ],
+        "slug": "addlistenerbrowserpageloaded"
+      },
+      {
+        "name": "addListener",
+        "signature": "(eventName: \"messageEvent\", listenerFunc: MessageReceivedListener) => Promise<PluginListenerHandle>",
+        "parameters": [
+          {
+            "name": "eventName",
+            "docs": "",
+            "type": "'messageEvent'"
+          },
+          {
+            "name": "listenerFunc",
+            "docs": "",
+            "type": "MessageReceivedListener"
+          }
+        ],
+        "returns": "Promise<PluginListenerHandle>",
+        "tags": [
+          {
+            "name": "since",
+            "text": "0.4.0"
+          }
+        ],
+        "docs": "Listen for posted messages",
+        "complexTypes": [
+          "PluginListenerHandle",
+          "MessageReceivedListener"
+        ],
+        "slug": "addlistenermessageevent"
+      },
+      {
+        "name": "addListener",
         "signature": "(eventName: \"confirmBtnClicked\", listenerFunc: ConfirmBtnListener) => Promise<PluginListenerHandle>",
         "parameters": [
           {
@@ -815,6 +873,35 @@
       ]
     },
     {
+      "name": "PageLoadEvent",
+      "slug": "pageloadevent",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": []
+    },
+    {
+      "name": "MessageEvent",
+      "slug": "messageevent",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "message",
+          "tags": [
+            {
+              "text": "0.0.1",
+              "name": "since"
+            }
+          ],
+          "docs": "Emit when the webview post a message",
+          "complexTypes": [],
+          "type": "string"
+        }
+      ]
+    },
+    {
       "name": "BtnEvent",
       "slug": "btnevent",
       "docs": "",
@@ -983,6 +1070,32 @@
           "text": "(state: UrlEvent): void",
           "complexTypes": [
             "UrlEvent"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "PageLoadListener",
+      "slug": "pageloadlistener",
+      "docs": "",
+      "types": [
+        {
+          "text": "(state: PageLoadEvent): void",
+          "complexTypes": [
+            "PageLoadEvent"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "MessageReceivedListener",
+      "slug": "messagereceivedlistener",
+      "docs": "",
+      "types": [
+        {
+          "text": "(state: MessageEvent): void",
+          "complexTypes": [
+            "MessageEvent"
           ]
         }
       ]

@@ -38,7 +38,20 @@ extension Dictionary {
     }
 }
 
-open class WKWebViewController: UIViewController {
+open class WKWebViewController: UIViewController, WKScriptMessageHandler {
+    
+    public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        print("message received");
+        let value = message.body as! String;
+        print(value);
+        /*if(value == "exit"){
+            self.completionHandler?(.canceled)
+        }else if(value == idUsuario){
+             self.completionHandler?(.authorized)
+        }else{
+            self.completionHandler?(.canceled)
+        }*/
+    }
 
     public init() {
         super.init(nibName: nil, bundle: nil)
@@ -214,7 +227,13 @@ open class WKWebViewController: UIViewController {
         self.extendedLayoutIncludesOpaqueBars = true
         self.edgesForExtendedLayout = [.bottom]
 
+        //let webConfiguration = WKWebViewConfiguration()
+        
+        let userContentController = WKUserContentController();
+        userContentController.add(self, name: "loginAction");
         let webConfiguration = WKWebViewConfiguration()
+        
+        webConfiguration.userContentController = userContentController
         let webView = WKWebView(frame: .zero, configuration: webConfiguration)
 
         if webView.responds(to: Selector(("setInspectable:"))) {

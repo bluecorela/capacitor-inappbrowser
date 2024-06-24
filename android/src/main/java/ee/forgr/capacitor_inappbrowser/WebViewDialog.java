@@ -98,7 +98,24 @@ public class WebViewDialog extends Dialog {
     _webView.getSettings().setAllowFileAccessFromFileURLs(true);
     _webView.getSettings().setAllowUniversalAccessFromFileURLs(true);
 
-    _webView.setWebViewClient(new WebViewClient());
+    _webView.setWebViewClient(new WebViewClient(){
+      @Override
+      public void onPageFinished(WebView view, String url) {
+        Log.d("Debug","enter here");
+        super.onPageFinished(view, url);
+        String script = "var webkit = { messageHandlers: { cordova_iab: { postMessage: "+
+                "   function(message) { "+
+                "   console.log(message)"+
+                "   AndroidInterface.handleMessage(message);" +
+                "} } }};";
+        Log.d("Debug","evaluating string");
+        Log.d("Debug",script);
+        // Inject JavaScript code
+        view.evaluateJavascript(script,
+                null
+        );
+      }
+    });
 
     _webView.setWebChromeClient(
       new WebChromeClient() {
@@ -212,6 +229,11 @@ public class WebViewDialog extends Dialog {
 
   public void executeScript(String script) {
     _webView.evaluateJavascript(script, null);
+  }
+
+  public void addJSInterface() {
+    Log.d("Debug","Adding AndroidInterace");
+    _webView.addJavascriptInterface(new WebAppInterface(_context,_options), "AndroidInterface");
   }
 
   public void setUrl(String url) {
