@@ -888,7 +888,7 @@
       "methods": [],
       "properties": [
         {
-          "name": "message",
+          "name": "action",
           "tags": [
             {
               "text": "0.0.1",

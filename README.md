@@ -399,9 +399,9 @@ Reload the current web page.
 
 #### MessageEvent
 
-| Prop          | Type                | Description                          | Since |
-| ------------- | ------------------- | ------------------------------------ | ----- |
-| **`message`** | <code>string</code> | Emit when the webview post a message | 0.0.1 |
+| Prop         | Type                | Description                          | Since |
+| ------------ | ------------------- | ------------------------------------ | ----- |
+| **`action`** | <code>string</code> | Emit when the webview post a message | 0.0.1 |
 
 
 #### BtnEvent
